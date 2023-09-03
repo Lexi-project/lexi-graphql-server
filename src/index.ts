@@ -5,6 +5,7 @@ import { createYoga, createSchema } from 'graphql-yoga';
 
 import type { Resolvers } from './resolvers-types';
 
+
 const schemaPath = path.resolve(
   process.cwd(),
   'src',
@@ -15,7 +16,12 @@ const typeDefs = readFileSync(schemaPath, 'utf8');
 
 const resolvers: Resolvers = {
   Query: {
-    hello: () => 'Hello world!',
+    exercise: (_, { exerciseConfiguration }) => ({
+      id: '1',
+      content: 'Hello World',
+      exerciseContent: 'Hello World',
+      exerciseParams: exerciseConfiguration,
+    }),
   }
 }
 

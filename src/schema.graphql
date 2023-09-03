@@ -1,3 +1,32 @@
+enum ExersiceType {
+    FILL_BLANK
+    YES_NO
+}
+
+input ExersiceInput {
+    exerciseType: ExersiceType!
+    context: String!
+    level: String!
+    isColloquial: Boolean!
+    characters: [String]
+}
+
+type ExerciseParams {
+    exerciseType: ExersiceType!
+    context: String!
+    level: String!
+    isColloquial: Boolean!
+    characters: [String]
+}
+
 type Query {
-    hello: String
+    exercise(exerciseConfiguration: ExersiceInput!): Exersice
+}
+
+type Exersice {
+    id: ID!
+    createdAt: String
+    content: String!
+    exerciseContent: String!
+    exerciseParams: ExerciseParams
 }
