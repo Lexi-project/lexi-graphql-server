@@ -1,6 +1,8 @@
 import path from 'node:path';
 import { readFileSync } from 'node:fs';
 import { createServer } from 'node:http';
+
+import axios from 'axios';
 import { createYoga, createSchema } from 'graphql-yoga';
 
 import type { Resolvers } from './resolvers-types';
@@ -16,12 +18,24 @@ const typeDefs = readFileSync(schemaPath, 'utf8');
 
 const resolvers: Resolvers = {
   Query: {
-    exercise: (_, { exerciseConfiguration }) => ({
-      id: '1',
-      content: 'Hello World',
-      exerciseContent: 'Hello World',
-      exerciseParams: exerciseConfiguration,
-    }),
+    exercise: async (_, { exerciseConfiguration }) => {
+      try {
+        const response = await axios.post('http://localhost:9001/exercises', exerciseConfiguration);
+        const { data } = response.data;
+
+        return {
+          id: '1',
+          content: data.generatedContent,
+          exerciseContent: {
+            replacements: []
+          }
+        };
+      } catch (error) {
+        // Error response
+        console.error(error);
+        return null;
+      }
+    }
   }
 }
 

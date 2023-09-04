@@ -11,14 +11,6 @@ input ExersiceInput {
     characters: [String]
 }
 
-type ExerciseParams {
-    exerciseType: ExersiceType!
-    context: String!
-    level: String!
-    isColloquial: Boolean!
-    characters: [String]
-}
-
 type Query {
     exercise(exerciseConfiguration: ExersiceInput!): Exersice
 }
@@ -27,6 +19,23 @@ type Exersice {
     id: ID!
     createdAt: String
     content: String!
-    exerciseContent: String!
-    exerciseParams: ExerciseParams
+    exerciseContent: FillBlankExercise!
+}
+
+type ConversationContent {
+    personName: String!
+    utterance: String!
+}
+
+type FillBlankExerciseItem {
+    index: Int!,
+    length: Int!,
+    hint: String!,
+    answer: String!,
+}
+
+type FillBlankExercise {
+    replacements: [
+        [FillBlankExerciseItem!]!
+    ]!
 }
