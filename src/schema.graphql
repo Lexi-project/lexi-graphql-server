@@ -18,13 +18,13 @@ type Query {
 type Exersice {
     id: ID!
     createdAt: String
-    content: String!
+    content: [ConversationContent]!
     exerciseContent: FillBlankExercise!
 }
 
 type ConversationContent {
     personName: String!
-    utterance: String!
+    quote: String!
 }
 
 type FillBlankExerciseItem {
@@ -36,6 +36,6 @@ type FillBlankExerciseItem {
 
 type FillBlankExercise {
     replacements: [
-        [FillBlankExerciseItem!]!
+        [FillBlankExerciseItem]
     ]!
 }

@@ -26,9 +26,7 @@ const resolvers: Resolvers = {
         return {
           id: '1',
           content: data.generatedContent,
-          exerciseContent: {
-            replacements: []
-          }
+          exerciseContent: data.exerciseContent
         };
       } catch (error) {
         // Error response

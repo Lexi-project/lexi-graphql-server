@@ -19,12 +19,12 @@ export type Scalars = {
 export type ConversationContent = {
   __typename?: 'ConversationContent';
   personName: Scalars['String']['output'];
-  utterance: Scalars['String']['output'];
+  quote: Scalars['String']['output'];
 };
 
 export type Exersice = {
   __typename?: 'Exersice';
-  content: Scalars['String']['output'];
+  content: Array<Maybe<ConversationContent>>;
   createdAt?: Maybe<Scalars['String']['output']>;
   exerciseContent: FillBlankExercise;
   id: Scalars['ID']['output'];
@@ -45,7 +45,7 @@ export enum ExersiceType {
 
 export type FillBlankExercise = {
   __typename?: 'FillBlankExercise';
-  replacements: Array<Array<FillBlankExerciseItem>>;
+  replacements: Array<Maybe<Array<Maybe<FillBlankExerciseItem>>>>;
 };
 
 export type FillBlankExerciseItem = {
@@ -167,12 +167,12 @@ export type ResolversParentTypes = ResolversObject<{
 
 export type ConversationContentResolvers<ContextType = any, ParentType extends ResolversParentTypes['ConversationContent'] = ResolversParentTypes['ConversationContent']> = ResolversObject<{
   personName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  utterance?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  quote?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type ExersiceResolvers<ContextType = any, ParentType extends ResolversParentTypes['Exersice'] = ResolversParentTypes['Exersice']> = ResolversObject<{
-  content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  content?: Resolver<Array<Maybe<ResolversTypes['ConversationContent']>>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   exerciseContent?: Resolver<ResolversTypes['FillBlankExercise'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -180,7 +180,7 @@ export type ExersiceResolvers<ContextType = any, ParentType extends ResolversPar
 }>;
 
 export type FillBlankExerciseResolvers<ContextType = any, ParentType extends ResolversParentTypes['FillBlankExercise'] = ResolversParentTypes['FillBlankExercise']> = ResolversObject<{
-  replacements?: Resolver<Array<Array<ResolversTypes['FillBlankExerciseItem']>>, ParentType, ContextType>;
+  replacements?: Resolver<Array<Maybe<Array<Maybe<ResolversTypes['FillBlankExerciseItem']>>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
