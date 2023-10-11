@@ -1,0 +1,16 @@
+sources:
+  - name: ContentServiceRPC
+    handler:
+      grpc:
+        endpoint: localhost:50051
+        source: lexi-proto/services/content_service/exercises.proto
+    transforms:
+      - rename:
+          mode: bare
+          renames:
+            - from:
+                type: Query
+                field: content_ExerciseContentService_GetExerciseContent
+              to:
+                type: Query
+                field: exercise
